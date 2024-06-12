@@ -1,0 +1,62 @@
+
+.signup-container{
+    background-color: rgb(255, 102, 0);
+    border: 1px solid rgb(255, 102, 0);
+    color:white;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 25vw;
+    padding: 20px 24px;
+    margin:10vh 35vw;
+    border-radius: 50px;
+    box-shadow:2px 8px 10px 10px rgba(0, 0, 0, 0.5);
+
+}
+.signup-title{
+ font-size: 2vw;
+}
+
+.user-form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+.uservalue{
+    height: 60px;
+    border-radius: 10px;
+    color: black;
+    border: none;
+}
+input{
+    font-size: 30px;
+}
+.uservalue::placeholder{
+    font-size: 20px;
+}
+.signupbtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20vw;
+    margin: 0px 10%;
+    height:40px;
+    font-size: 30px;
+    color: orange;
+    background-color: white;
+    border: none;
+    border-radius: 30px;
+    font-weight: 600;
+}
+.login{
+    font-size: 30px;
+    color: white;
+    font-weight: 600;
+}
+.loginpage{
+    color: blue;
+}

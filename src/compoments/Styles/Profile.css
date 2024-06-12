@@ -1,0 +1,46 @@
+.profile-container{
+    height: 100%;
+    margin:  50px 20px;
+    padding:0;
+    display: flex;
+    gap: 50px;
+}
+.profile{
+ width:10%;
+ color: white;
+ background-color: orange;
+ border-radius: 50%;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ font-size: 50px;
+ font-weight: 600;
+ height:130px;
+}
+.data-section{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+p{
+    margin: 10px;
+    font-size:20px;
+}
+span{
+    margin-left: 10px;
+    font-size: 30px;
+    font-weight: 800;
+}
+button{
+    height: 50px;
+    border-radius: 10px;
+    font-size: 25px;
+    font-weight: 600;
+    border:none;
+}
+button:hover{
+    box-shadow: 10px 10px 10px;
+    transition: all .4s ease;
+
+}
