@@ -1,23 +1,44 @@
+.signup-Page{
+   background-color: #212227;
+    padding: 38px 20%;
+    height: 100vh;
 
+}
+.Login-page{
+    padding: 71px 20%;
+}
 .signup-container{
-    background-color: rgb(255, 102, 0);
-    border: 1px solid rgb(255, 102, 0);
-    color:white;
+    display: flex;
+    width: max-content;
+    background: white;
+    box-shadow:2px 8px 10px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+ background-image: url("../../../public/signupbg.jpg");
+ width: 50%;
+ background-repeat: no-repeat;
+ background-size: cover;
+ width:100%;
+ border:1px solid #323337;
+}
+
+.signup-div{
     display: flex;
     text-align: center;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 20px;
-    width: 25vw;
-    padding: 20px 24px;
-    margin:10vh 35vw;
+    padding:50px 20px;
     border-radius: 50px;
-    box-shadow:2px 8px 10px 10px rgba(0, 0, 0, 0.5);
+    margin-left: auto;
+    width: 45%;
 
 }
 .signup-title{
- font-size: 2vw;
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+font-size: 20px;  
+ color: white;
 }
 
 .user-form{
@@ -27,13 +48,18 @@
     width: 100%;
 }
 .uservalue{
-    height: 60px;
-    border-radius: 10px;
-    color: black;
+    height: 45px;
+    color: white;
     border: none;
+    border: 1px outset;
+    background-color: #304c55;
+    border: none;
+    border-radius: 10px;
+    padding: 0 10px;
+
 }
 input{
-    font-size: 30px;
+    font-size: 18px;
 }
 .uservalue::placeholder{
     font-size: 20px;
@@ -41,22 +67,69 @@ input{
 .signupbtn{
     display: flex;
     justify-content: center;
-    align-items: center;
-    width: 20vw;
-    margin: 0px 10%;
-    height:40px;
-    font-size: 30px;
-    color: orange;
-    background-color: white;
+    margin: 0px 5px;
+    font-size: 20px;
+    color: white;
+    background-color: orange;
     border: none;
-    border-radius: 30px;
-    font-weight: 600;
+    font-weight: 500;
+    border-radius: 0;
+    text-align: center;
+    padding: 15px 0px;
+    transform: ease-in 1s;
+    
+}
+.signupbtn:hover{
+    box-shadow:-2px 12px 10px 10px rgba(0, 0, 0, 0.5);
+
 }
 .login{
-    font-size: 30px;
-    color: white;
-    font-weight: 600;
+    font-size: 12px;
+    margin: 0;
+    margin-bottom:30px;
+    color: rgb(95, 96, 99);
+    font-weight:700 ;
+
 }
 .loginpage{
-    color: blue;
+    color: #CF5D05;
+}
+
+
+.password-show{
+    display: flex;
+    align-items: flex-start;
+}
+.checkbox-label{
+    font-size: 15px;
+    margin: 0;
+    margin-bottom:30px;
+    color: rgb(48, 48, 49);
+    font-weight:700 ;
+}
+.login-check{
+color:#CF5D05;
+}
+
+@media(max-width:767px){
+    .left-div{
+        display: none;
+    }
+    .signup-container{
+        justify-content: center;
+    }
+    .signup-div{
+        width: -webkit-fill-available;
+        padding: 40px 20px;
+    }
+    .signup-container{
+        background-image: none;
+    }
+    .signup-Page{
+        padding: 10px;
+    }
+    .signup-title{
+        color: black;
+    }
+
 }
