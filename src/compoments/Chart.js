@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import "../../src/compoments/Styles/UserData.css"
 export const Chart = ({date,money}) => {
-  console.log("iter",date)
  
   
   const state = {

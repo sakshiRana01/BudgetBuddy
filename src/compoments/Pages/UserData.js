@@ -48,9 +48,7 @@ export const UserData = () => {
     const monthval = currentDate.getMonth() + 1;
     const year = currentDate.getFullYear();
 
-    console.log(`Current Date: ${day}`);
-    console.log(`Current Month: ${monthval}`);
-    console.log(`Current Year: ${year}`);
+;
 
     useEffect(() => {
         setLoader(true);
@@ -78,7 +76,6 @@ export const UserData = () => {
                         '6656a588002449f41782',
                         [Query.equal('ID', user.$id)]
                     );
-                    console.log("Response data ---------", response);
                     setUserData(response.documents);
                     const initialData = response.documents.slice(-7).reverse();
                     setIterateData(initialData);
@@ -101,26 +98,20 @@ export const UserData = () => {
     const findMonthExpense = () => {
         let value = 0;
         const formattedMonthVal = monthval.toString().padStart(2, '0'); // Ensure monthval is a two-digit string
-        console.log("formattedMonthVal:", formattedMonthVal);
 
         for (let i = 0; i < userData.length; i++) {
-            console.log("--------------");
             const date = new Date(userData[i].Date); // Convert to Date object
             const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Get month and pad it to two digits
-            console.log("Processing date:", userData[i].Date);
-            console.log("Extracted month:", month);
+            
 
             if (month === formattedMonthVal) {
                 value += userData[i].Money;
-                console.log("Matched month:", month);
-                console.log("Current value:", value);
+            
             }
         }
-        console.log("Final month expenses value:", value);
         setMonthExpenses(value);
     };
 
-    console.log("monthExpenses", monthExpenses);
 
     const groupExpensesByDate = (data = userData) => {
         const groupedData = data.reduce((acc, expense) => {
@@ -151,7 +142,6 @@ export const UserData = () => {
         }
     };
 
-    console.log("lastIndex", lastIndex);
 
     const handleNext = () => {
         if (lastIndex <= userData.length) {
@@ -215,7 +205,6 @@ export const UserData = () => {
                     Note: data.Note
                 }
             );
-            console.log("Response", response);
             toast.success("Added Successfully");
 
             setUserData((prevData) => [...prevData, response]);
@@ -260,7 +249,6 @@ export const UserData = () => {
         }
     };
 
-    console.log("userData", userData);
 
     const handleAdd = () => {
         setAddExpenses(!addExpenses);
