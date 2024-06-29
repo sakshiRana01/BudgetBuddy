@@ -6,7 +6,7 @@ import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } 
 import { Logins } from './compoments/Pages/Logins';
 import { Signup } from './compoments/Pages/Signup';
 
-import { UserData } from './compoments/Pages/UserData';
+import { UserData}  from './compoments/Pages/UserData';
 
 const router=createBrowserRouter(
   createRoutesFromElements(

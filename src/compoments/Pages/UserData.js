@@ -5,36 +5,29 @@ import { DateConvert } from '../DateConvert';
 import '../Styles/UserData.css';
 import Chart from '../Chart';
 import { useNavigate } from 'react-router';
-import { MdWavingHand } from "react-icons/md";
+import { MdWavingHand, MdLogout } from "react-icons/md";
 import { IoAdd } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
-import { MdLogout } from "react-icons/md";
 import { ColorRing } from 'react-loader-spinner';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import CircularProgress from '@mui/joy/CircularProgress';
-import Joyride from 'react-joyride';
-import 'react-circular-progressbar/dist/styles.css';
 import {
     CircularProgressbar,
     buildStyles
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import Joyride from "react-joyride";
 
 export const UserData = () => {
     const [userData, setUserData] = useState([]);
     const [iterateData, setIterateData] = useState([]);
     const [lastIndex, setLastIndex] = useState(0);
     const [showNote, setShowNote] = useState({});
-    const [activeMoneyExpenses, setActiveMoneyExpenses] = useState(false);
-    const [activeNotes, setActiveNotes] = useState(false);
-    const [activeAllData, setActiveAllData] = useState(false);
-    const [user, setUser] = useState([]);
+    const [user, setUser] = useState({});
     const [monthExpenses, setMonthExpenses] = useState(0);
     const [profile, setProfile] = useState('');
     const [addExpenses, setAddExpenses] = useState(false);
     const [isRendered, setIsRendered] = useState(false);
-    const [showTour, setTour] = useState(false);
     const [name, setName] = useState('');
 
     const [data, setData] = useState({
@@ -42,13 +35,13 @@ export const UserData = () => {
         Amount: '',
         Note: ''
     });
+
     const [loader, setLoader] = useState(false);
+
     const currentDate = new Date();
     const day = currentDate.getDate();
     const monthval = currentDate.getMonth() + 1;
     const year = currentDate.getFullYear();
-
-;
 
     useEffect(() => {
         setLoader(true);
@@ -59,17 +52,17 @@ export const UserData = () => {
                 setLoader(false);
                 setName(result.name[0]);
             } catch (error) {
-                console.log("No account");
+                console.log("Error fetching account data", error);
+                setLoader(false);
             }
         };
 
         fetchAccount();
     }, []);
 
-    // Fetch user data from the database
     useEffect(() => {
         const fetchData = async () => {
-            if (user) {
+            if (user && user.$id) {
                 try {
                     const response = await databases.listDocuments(
                         '6656a57e002234baa87a',
@@ -81,7 +74,7 @@ export const UserData = () => {
                     setIterateData(initialData);
                     setLastIndex(response.documents.length - 7);
                 } catch (error) {
-                    console.log("No data", error);
+                    console.log("Error fetching user data", error);
                 }
             }
         };
@@ -97,25 +90,22 @@ export const UserData = () => {
 
     const findMonthExpense = () => {
         let value = 0;
-        const formattedMonthVal = monthval.toString().padStart(2, '0'); // Ensure monthval is a two-digit string
+        const formattedMonthVal = monthval.toString().padStart(2, '0');
 
         for (let i = 0; i < userData.length; i++) {
-            const date = new Date(userData[i].Date); // Convert to Date object
-            const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Get month and pad it to two digits
-            
+            const date = new Date(userData[i].Date);
+            const month = (date.getMonth() + 1).toString().padStart(2, '0');
 
             if (month === formattedMonthVal) {
                 value += userData[i].Money;
-            
             }
         }
         setMonthExpenses(value);
     };
 
-
     const groupExpensesByDate = (data = userData) => {
         const groupedData = data.reduce((acc, expense) => {
-            const date = expense.Date.split('T')[0]; // Get the date part only
+            const date = expense.Date.split('T')[0];
             if (!acc[date]) {
                 acc[date] = {
                     Date: date,
@@ -132,7 +122,6 @@ export const UserData = () => {
         setIterateData(groupedArray.slice(-7).reverse());
     };
 
-    // Handle showing previous data
     const handlePrev = () => {
         if (lastIndex > 0) {
             const newLastIndex = Math.max(lastIndex - 7, 0);
@@ -141,7 +130,6 @@ export const UserData = () => {
             setLastIndex(newLastIndex);
         }
     };
-
 
     const handleNext = () => {
         if (lastIndex <= userData.length) {
@@ -152,7 +140,6 @@ export const UserData = () => {
         }
     };
 
-    // Handle form submission
     const steps = [
         {
             target: ".add",
@@ -186,8 +173,8 @@ export const UserData = () => {
     ];
 
     useEffect(() => {
-        if (!loader && user && userData.length > 0) {
-            setIsRendered(true); // Set this when all elements are rendered
+        if (!loader && user && (userData.length > 0 || userData.length === 0)) {
+            setIsRendered(true);
         }
     }, [loader, user, userData]);
 
@@ -219,7 +206,7 @@ export const UserData = () => {
 
             findMonthExpense();
         } catch (error) {
-            console.log("Error", error);
+            console.log("Error adding expense", error);
         }
     };
 
@@ -228,10 +215,10 @@ export const UserData = () => {
         const regex = /^(\d{4})-(\d{2})-(\d{2})/;
         const match = dateString.match(regex);
         if (match) {
-            const [_, year, month, day] = match; // Destructure the matched parts
+            const [_, year, month, day] = match;
             return `${day}-${month}-${year}`;
         }
-        return null; // or handle invalid date format appropriately
+        return null;
     });
 
     const money = iterateData.map(item => item.Money);
@@ -245,10 +232,9 @@ export const UserData = () => {
                 navigate('/login');
             }
         } catch (error) {
-            console.log("Error", error);
+            console.log("Error logging out", error);
         }
     };
-
 
     const handleAdd = () => {
         setAddExpenses(!addExpenses);
@@ -257,7 +243,7 @@ export const UserData = () => {
 
     return (
         <>
-            {isRendered && (
+            {isRendered && 
                 <Joyride
                     steps={steps}
                     continuous={true}
@@ -279,7 +265,7 @@ export const UserData = () => {
                         },
                     }}
                 />
-            )}
+            }
 
             {addExpenses && (
                 <div className="add-container">
@@ -351,7 +337,7 @@ export const UserData = () => {
                             Welcome<span style={{ margin: "0 10px" }}>{user.name}</span>
                             <MdWavingHand style={{ color: "#F3BC1C" }} />
                         </h1>
-                        <button className='showbtn' onClick={handlePrev}>Show Previous</button>
+                        <button className='showbtn prev' onClick={handlePrev}>Show Previous</button>
                         <button className='showbtn next' onClick={handleNext}>Show Next</button>
                         <div className='chart-div'>
                             <Chart date={dates} money={money} />
@@ -360,7 +346,6 @@ export const UserData = () => {
                             {iterateData.map((item) => (
                                 <div key={item.Date} className='note-div'>
                                     <DateConvert timestamp={item.Date} />
-                                    <p className='note'>Rs {item.Money}</p>
                                     <p className='note'>Notes: {item.Notes ? item.Notes.join(", ") : ''}</p>
                                 </div>
                             ))}
@@ -385,3 +370,4 @@ export const UserData = () => {
         </>
     );
 };
+
