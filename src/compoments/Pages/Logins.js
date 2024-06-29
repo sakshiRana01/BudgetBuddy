@@ -20,7 +20,7 @@ export const Logins=()=>{
     try{
       const session=await account.createEmailPasswordSession(userData.email,userData.password)
       if(session){
-       navigate('/userData')
+       navigate('/budgetBuddy')
       }
     }
     catch(error){

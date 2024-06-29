@@ -30,7 +30,7 @@ export const Signup = () => {
         const session = await account.createEmailPasswordSession(userData.email, userData.password);
         if (session) {
           localStorage.setItem('status', 'true');
-          navigate('/userData');
+          navigate('/budgetBuddy');
         }
       } 
     } catch (error) {      
