@@ -269,7 +269,7 @@ export const UserData = () => {
 
             {addExpenses && (
                 <div className="add-container">
-                    <RxCross2 style={{ color: "white", position: "absolute", top: "21px", right: "24px" }} onClick={handleAdd} />
+                    <RxCross2 style={{ color: "white", position: "absolute", top: "21px", right: "24px",cursor:"pointer"}} onClick={handleAdd} />
                     <p className="add-title">Add my Expense</p>
                     <form onSubmit={handleSubmit} className='userdata'>
                         <input
